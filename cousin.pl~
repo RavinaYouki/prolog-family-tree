@@ -1,0 +1,113 @@
+Father(seraj,youki).
+father(rafiq,seraj).
+father(mofij,rafiq).
+father(zahanbaksh,mofij).
+
+father(samad,ira).
+father(shafiq,shirin).
+father(nasir,shafiq).
+father(zahanbaksh,nasir).
+
+mother(shilpe,youki).
+mother(piyara,seraj).
+mother(salma,rafiq).
+mother(hosneara,mofij).
+
+mother(shirin,ira).
+mother(salma,shirin).
+mother(rahima,shafiq).
+mother(hosneara,nasir).
+
+parent(Parent_name,Child_name):-
+
+   father(Parent_name,Child_name);
+   mother(Parent_name,Child_name).
+
+
+
+grandparent(Gparent_name,Gchild_name):-
+   parent(X,Gchild_name),parent(Gparent_name,X).
+
+greatgrandparent(GGparent,GGchild):-
+ grandparent(X,GGchild),parent(GGparent,X).
+
+
+gggparent(Gggpa_name,Gggchild):-
+   greatgrandparent(X,Gggchild),parent(Gggpa_name,X).
+
+
+
+firstcousin(Cousin1,Cousin2):-
+   grandparent(X,Cousin1),grandparent(X,Cousin2),parent(A,Cousin1),not(parent(A,Cousin2)),
+write(Cousin1),tab(1),
+format('is first cousin of ~w', [Cousin2]).
+
+
+secondcousin(Cousin1,Cousin2):-
+   greatgrandparent(X,Cousin1),greatgrandparent(X,Cousin2),grandparent(A,Cousin1),not(grandparent(A,Cousin2)),
+write(Cousin1),tab(1),
+format('is second cousin of ~w', [Cousin2]).
+
+fcousinonceremove(Cousin1,Cousin2):-
+  grandparent(X,Cousin1),greatgrandparent(X,Cousin2),parent(A,Cousin1),not(grandparent(A,Cousin2)),
+write(Cousin2),tab(1),
+format('is first cousin once removed of ~w', [Cousin1]).
+
+
+fcousintwiceremove(Cousin1,Cousin2):-
+  grandparent(X,Cousin1),gggparent(X,Cousin2),parent(Cousin1,A),not(parent(A,Cousin2)),
+  write(Cousin2),tab(1),
+format('is first cousin twice removed of ~w', [Cousin1]).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
